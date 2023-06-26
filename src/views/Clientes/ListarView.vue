@@ -1,15 +1,15 @@
 <script setup>
 import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
-import MenuItem from '../components/UI/MenuItem.vue';
+import MenuItem from '../../components/UI/MenuItem.vue';
 </script>
 
 <template>
   <div class="flex justify-between">
     <h1 class="text-3xl text-slate-500 font-bold">Clientes</h1>
     <Menu as="div" class="outline-none relative">
-      <MenuButton class="rounded-md bg-white px-4 py-1 shadow-sm flex items-center justify-between gap-2 mb-2">
+      <MenuButton class="rounded-md bg-white dark:bg-slate-700 px-4 py-1 shadow-sm flex items-center justify-between gap-2 mb-2">
         <span class="text-gray-700 dark:text-gray-100">Acciones</span>
-        <v-icon name="fa-chevron-down" class="w-4 fill-gray-500"/>
+        <v-icon name="fa-chevron-down" class="w-4 fill-gray-500 dark:fill-gray-400"/>
       </MenuButton>
       <transition
         enter-active-class="transition duration-100 ease-out"
@@ -19,16 +19,16 @@ import MenuItem from '../components/UI/MenuItem.vue';
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <MenuItems class="absolute right-0 p-2 bg-white drop-shadow-md flex flex-col gap-1 rounded-md w-48">
-          <MenuItem to="/agregar-clientes">
+        <MenuItems class="absolute right-0 p-2 bg-white dark:bg-slate-700 drop-shadow-md flex flex-col gap-1 rounded-md w-48">
+          <MenuItem to="agregar cliente">
             <v-icon name="fa-user-plus"/>
             Agregar clientes
           </MenuItem>
-          <MenuItem to="/agregar-clientes">
+          <MenuItem to="agregar cliente">
             <v-icon name="fa-user-edit"/>
             Editar clientes
           </MenuItem>
-          <MenuItem to="/agregar-clientes">
+          <MenuItem to="">
             <v-icon name="bi-gear-fill"/>
             Configuracion
           </MenuItem>
