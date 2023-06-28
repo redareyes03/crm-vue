@@ -37,4 +37,7 @@ import MenuItem from '../../components/UI/MenuItem.vue';
     </Menu>
   </div>
 
+  <div>
+    <h2>Listado de clientes</h2>
+  </div>
 </template> 
