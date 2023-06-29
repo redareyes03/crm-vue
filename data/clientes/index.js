@@ -6,3 +6,8 @@ export const getClientes = async ()=> {
     const data = (await axios(`${baseUrl}`)).data
     return data
 }
+
+export const postCliente = async (data) => {
+    const response = await axios.post(baseUrl, data)
+    return response
+}

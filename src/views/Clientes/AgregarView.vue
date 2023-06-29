@@ -5,6 +5,10 @@ import Boton from '../../components/UI/Boton.vue';
 import { ArrowRight } from '@element-plus/icons-vue'
 import 'element-plus/es/components/breadcrumb/style/css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import { postCliente } from '../../../data/clientes';
+
+
+const handleSubmit = async data => await postCliente(data)
 </script>
 
 <template>
@@ -15,17 +19,19 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 
    <div class="flex justify-between items-center">
 
-      <h1 class="text-3xl text-slate-500 font-bold">Agregar Cliente</h1>
+      <h1 class="text-3xl text-slate-500 dark:text-white font-bold">Agregar Cliente</h1>
       <Boton>
-         <RouterLink :to="{ name: 'inicio' }">Volver</RouterLink>
+         <RouterLink :to="{ name: 'inicio' }" class="py-1.5 px-4 block">Volver</RouterLink>
       </Boton>
    </div>
 
-   <div class="bg-white/60 dark:bg-slate-700 transition p-8 mt-8 rounded-md shadow w-full max-w-xl mx-auto">
+   <div class="bg-white/60 dark:bg-slate-700 transition p-8 my-8 rounded-md shadow w-full max-w-xl mx-auto">
       <div class="mx-auto w-full max-w-md">
          <FormKit 
             type="form" 
             submit-label="Agregar cliente"
+            :actions="false"
+            @submit="handleSubmit"
             >
             <div class="grid grid-cols-2 gap-4">
                <FormKit 
@@ -77,6 +83,13 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
                   label="Puesto"
                   placeholder="Puesto en la empresa"/>
              </div>
+
+             <FormKit 
+               type="submit"
+               label="Agregar Cliente"
+               input-class="bg-sky-500"
+               wrapper-class="w-fit mx-auto mt-4"
+               />
          </FormKit>
          </div>
    </div>
