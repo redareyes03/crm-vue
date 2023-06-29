@@ -8,7 +8,16 @@ import { computed } from 'vue';
         }
     })
 
+    const estados = {
+        1: "Activo",
+        0: "Inactivo",
+    }
+
     const nombreCliente = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido)
+    const estadoCliente = computed(() => {
+        return estados[props.cliente.estado]
+    })
+    const claseEstadoCliente = computed(() => props.cliente.estado === 1 ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800')
 </script>
 
 <template>
@@ -25,7 +34,11 @@ import { computed } from 'vue';
             <p class="text-gray-500 dark:text-gray-200">{{ cliente.telefono }}</p>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm">
-
+            <button 
+                class="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
+                :class="[claseEstadoCliente]">
+                {{ estadoCliente }}
+            </button>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200">
             
