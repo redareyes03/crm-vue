@@ -6,6 +6,7 @@ import { MdDarkmodeTwotone, MdWbsunnyTwotone, FaChevronDown, FaUserPlus, FaUserE
 import App from './App.vue'
 import router from './router'
 import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import { plugin, defaultConfig } from '@formkit/vue'
 import config from '../formkit.config'
 
