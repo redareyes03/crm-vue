@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import Boton from '../../components/UI/Boton.vue';
 
 import { ArrowRight } from '@element-plus/icons-vue'
@@ -7,19 +7,32 @@ import 'element-plus/es/components/breadcrumb/style/css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import { postCliente } from '../../../data/clientes';
 
+const router = useRouter()
 
-const handleSubmit = async data => await postCliente(data)
+const handleSubmit = async data => {
+   await postCliente(data)
+   router.push({
+      name: 'inicio'
+   })
+}
+
+
+defineProps({
+   pagina: {
+      type: String
+   }
+})
 </script>
 
 <template>
    <el-breadcrumb :separator-icon="ArrowRight" class="mb-4 dark:text-white">
       <el-breadcrumb-item :to="{ path: '/' }">Inicio</el-breadcrumb-item>
-      <el-breadcrumb-item>Agregar Cliente</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ pagina }} Cliente</el-breadcrumb-item>
    </el-breadcrumb>
 
    <div class="flex justify-between items-center">
 
-      <h1 class="text-3xl text-slate-500 dark:text-white font-bold">Agregar Cliente</h1>
+      <h1 class="text-3xl text-slate-500 dark:text-white font-bold">{{ pagina }} Cliente</h1>
       <Boton>
          <RouterLink :to="{ name: 'inicio' }" class="py-1.5 px-4 block">Volver</RouterLink>
       </Boton>
@@ -29,9 +42,9 @@ const handleSubmit = async data => await postCliente(data)
       <div class="mx-auto w-full max-w-md">
          <FormKit 
             type="form" 
-            submit-label="Agregar cliente"
             :actions="false"
             @submit="handleSubmit"
+            incomplete-message="Hay datos que no estan completos o tienen errores"
             >
             <div class="grid grid-cols-2 gap-4">
                <FormKit 
@@ -65,10 +78,10 @@ const handleSubmit = async data => await postCliente(data)
                   type="tel"
                   name="telefono"
                   label="Teléfono"
-                  placeholder="Formato XXX-XXX-XXXX"
-                  validation="required|*matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/"
+                  placeholder="Telefono del cliente"
+                  validation="required"
                   prefix-icon="telephone"
-                  :validation-messages="{required: 'El teléfono es obligatorio', matches: 'El formato es incorrecto'}"/>
+                  :validation-messages="{required: 'El teléfono es obligatorio'}"/>
 
             <div class="grid grid-cols-2 gap-4">
                <FormKit 
@@ -86,7 +99,7 @@ const handleSubmit = async data => await postCliente(data)
 
              <FormKit 
                type="submit"
-               label="Agregar Cliente"
+               :label="pagina + ' Cliente'"
                input-class="bg-sky-500"
                wrapper-class="w-fit mx-auto mt-4"
                />

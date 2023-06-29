@@ -7,11 +7,13 @@ import { computed } from 'vue';
             required: true
         }
     })
-
+    
     const estados = {
         1: "Activo",
         0: "Inactivo",
     }
+
+    const baseUrl = "http://localhost:5173"
 
     const nombreCliente = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido)
     const estadoCliente = computed(() => {
@@ -41,7 +43,7 @@ import { computed } from 'vue';
             </button>
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200">
-            
+            <RouterLink :to="`editar-cliente/${cliente.id}`">Editar</RouterLink>
         </td>
     </tr>
 </template>

@@ -8,6 +8,12 @@ import { getClientes } from '../../../data/clientes'
 const clientes = ref([])
 const loading = ref(true)
 
+const props = defineProps({
+  alerta: {
+    type: String
+  }
+})
+
 onMounted(async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   clientes.value = await getClientes()
@@ -77,4 +83,6 @@ const hayClientes = computed(() => clientes.value.length > 0)
 
     <p v-if="!loading && !hayClientes" class="mt-10 text-2xl text-center dark:text-gray-100">No hay clientes</p>
   </div>
+
+  <p> Alerta:  {{ alerta }}</p>
 </template> 
