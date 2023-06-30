@@ -8,8 +8,12 @@ export const getClientes = async ()=> {
 }
 
 export const postCliente = async (data) => {
-    const response = await axios.post(baseUrl, data)
-    return response
+    try {
+        const request = await axios.post(baseUrl, data)
+        return request
+    } catch (error) {
+        return error
+    }
 }
 
 export const getClienteById = async (id) => {
@@ -17,5 +21,14 @@ export const getClienteById = async (id) => {
         return (await axios.get(`${baseUrl}/${id}`)).data
     } catch (error) {
         throw new Error(error)
+    }
+}
+
+export const editCliente = async (data, id) => {
+    try {
+        const request = await axios.put(`${baseUrl}/${id}`, data)
+        return request
+    } catch (error) {
+        return error
     }
 }

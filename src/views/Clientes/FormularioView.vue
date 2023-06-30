@@ -5,7 +5,7 @@ import Boton from '../../components/UI/Boton.vue';
 import { ArrowRight } from '@element-plus/icons-vue'
 import 'element-plus/es/components/breadcrumb/style/css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import { getClienteById, postCliente } from '../../../data/clientes';
+import { getClienteById, postCliente, editCliente } from '../../../data/clientes';
 import {reactive, onMounted} from 'vue';
 
 const clienteData = reactive({
@@ -19,16 +19,27 @@ const clienteData = reactive({
 
 const router = useRouter()
 const route = useRoute()
-
+const {id} = route.params
 const handleSubmit = async data => {
-   await postCliente(data)
+   if(id){
+      try {
+         await editCliente(data, id)
+      } catch (error) {
+
+      }
+   }else{
+      try {
+         await postCliente(data)
+      } catch (error) {
+         
+      }
+   }
    router.push({
       name: 'inicio'
    })
 }
 
 onMounted(async () => {
-   const {id} = route.params
    if(id){
       try{
          const data = await getClienteById(id)
