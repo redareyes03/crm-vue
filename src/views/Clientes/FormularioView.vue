@@ -1,13 +1,24 @@
 <script setup>
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink, useRouter, useRoute } from 'vue-router';
 import Boton from '../../components/UI/Boton.vue';
 
 import { ArrowRight } from '@element-plus/icons-vue'
 import 'element-plus/es/components/breadcrumb/style/css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import { postCliente } from '../../../data/clientes';
+import { getClienteById, postCliente } from '../../../data/clientes';
+import {reactive, onMounted} from 'vue';
+
+const clienteData = reactive({
+   nombre: '',
+   apellido: '',
+   email: '',
+   telefono: '',
+   empresa: '',
+   puesto: ''
+})
 
 const router = useRouter()
+const route = useRoute()
 
 const handleSubmit = async data => {
    await postCliente(data)
@@ -16,12 +27,25 @@ const handleSubmit = async data => {
    })
 }
 
+onMounted(async () => {
+   const {id} = route.params
+   if(id){
+      try{
+         const data = await getClienteById(id)
+         Object.assign(clienteData, data)
+      }catch(error){
+         router.push({name: '404'})
+      }
+   }
+})
 
 defineProps({
    pagina: {
       type: String
    }
 })
+
+
 </script>
 
 <template>
@@ -37,7 +61,6 @@ defineProps({
          <RouterLink :to="{ name: 'inicio' }" class="py-1.5 px-4 block">Volver</RouterLink>
       </Boton>
    </div>
-
    <div class="bg-white/60 dark:bg-slate-700 transition p-8 my-8 rounded-md shadow w-full max-w-xl mx-auto">
       <div class="mx-auto w-full max-w-md">
          <FormKit 
@@ -45,10 +68,13 @@ defineProps({
             :actions="false"
             @submit="handleSubmit"
             incomplete-message="Hay datos que no estan completos o tienen errores"
+            :value="clienteData"
+            v-model="clienteData"
             >
             <div class="grid grid-cols-2 gap-4">
                <FormKit 
                   type="text"
+                  input-class="dark:text-white"
                   name="nombre"
                   label="Nombre(s)"
                   placeholder="Nombre del Cliente"
@@ -57,6 +83,7 @@ defineProps({
             
                <FormKit 
                   type="text"
+                  input-class="dark:text-white"
                   name="apellido"
                   label="Apellido"
                   placeholder="Apellido del Cliente"
@@ -66,6 +93,7 @@ defineProps({
 
                <FormKit 
                   type="email"
+                  input-class="dark:text-white"
                   name="email"
                   label="Email"
                   placeholder="Email del Cliente"
@@ -76,6 +104,7 @@ defineProps({
 
                <FormKit 
                   type="tel"
+                  input-class="dark:text-white"
                   name="telefono"
                   label="Teléfono"
                   placeholder="Telefono del cliente"
@@ -86,12 +115,14 @@ defineProps({
             <div class="grid grid-cols-2 gap-4">
                <FormKit 
                   type="text"
+                  input-class="dark:text-white"
                   name="empresa"
                   label="Empresa"
                   placeholder="Empresa a la que pertenece"/>
 
                <FormKit 
                   type="text"
+                  input-class="dark:text-white"
                   name="puesto"
                   label="Puesto"
                   placeholder="Puesto en la empresa"/>

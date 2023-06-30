@@ -83,6 +83,4 @@ const hayClientes = computed(() => clientes.value.length > 0)
 
     <p v-if="!loading && !hayClientes" class="mt-10 text-2xl text-center dark:text-gray-100">No hay clientes</p>
   </div>
-
-  <p> Alerta:  {{ alerta }}</p>
 </template> 
