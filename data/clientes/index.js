@@ -11,3 +11,11 @@ export const postCliente = async (data) => {
     const response = await axios.post(baseUrl, data)
     return response
 }
+
+export const getClienteById = async (id) => {
+    try {
+        return (await axios.get(`${baseUrl}/${id}`)).data
+    } catch (error) {
+        throw new Error(error)
+    }
+}
