@@ -18,7 +18,8 @@ export const postCliente = async (data) => {
 
 export const getClienteById = async (id) => {
     try {
-        return (await axios.get(`${baseUrl}/${id}`)).data
+        const data = (await axios.get(`${baseUrl}/${id}`)).data
+        return data
     } catch (error) {
         throw new Error(error)
     }
@@ -28,6 +29,14 @@ export const editCliente = async (data, id) => {
     try {
         const request = await axios.patch(`${baseUrl}/${id}`, data)
         return request
+    } catch (error) {
+        return error
+    }
+}
+
+export const deleteCliente = async (id) => {
+    try {
+        const request = axios.delete(`${baseUrl}/${id}`)
     } catch (error) {
         return error
     }
