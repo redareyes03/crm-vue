@@ -26,7 +26,7 @@ export const getClienteById = async (id) => {
 
 export const editCliente = async (data, id) => {
     try {
-        const request = await axios.put(`${baseUrl}/${id}`, data)
+        const request = await axios.patch(`${baseUrl}/${id}`, data)
         return request
     } catch (error) {
         return error

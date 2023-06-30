@@ -1,5 +1,6 @@
 <script setup>
-import { computed } from 'vue';
+    import { computed, ref } from 'vue';
+    import {editCliente} from '../../data/clientes'
 
     const props = defineProps({
         cliente: {
@@ -13,13 +14,19 @@ import { computed } from 'vue';
         0: "Inactivo",
     }
 
-    const baseUrl = "http://localhost:5173"
+    const estado = ref(props.cliente.estado)
 
     const nombreCliente = computed(() => props.cliente.nombre + ' ' + props.cliente.apellido)
     const estadoCliente = computed(() => {
-        return estados[props.cliente.estado]
+        return estados[estado.value]
     })
-    const claseEstadoCliente = computed(() => props.cliente.estado === 1 ? 'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50' : 'bg-red-200 text-red-800 dark:bg-red-500 dark:text-red-50')
+
+    const claseEstadoCliente = computed(() => estado.value === 1 ? 'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50' : 'bg-red-200 text-red-800 dark:bg-red-500 dark:text-red-50')
+
+    const editarCliente = async() => {
+        await editCliente({estado: estado.value == 1 ? 0 : 1}, props.cliente.id)
+        estado.value = estado.value == 1 ? 0 : 1
+    }
 </script>
 
 <template>
@@ -37,6 +44,7 @@ import { computed } from 'vue';
         </td>
         <td class="whitespace-nowrap px-3 py-4 text-sm">
             <button 
+                @click="editarCliente"
                 class="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
                 :class="[claseEstadoCliente]">
                 {{ estadoCliente }}
