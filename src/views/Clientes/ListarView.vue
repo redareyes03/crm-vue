@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue';
-import { getClientes, deleteCliente } from '../../../data/clientes'
+import { getClientes, deleteCliente } from '../../../services/clientes'
 import Cliente from '../../components/Cliente.vue';
 import Button from '../../components/UI/Boton.vue'
 

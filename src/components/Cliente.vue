@@ -1,6 +1,6 @@
 <script setup>
     import { computed, ref } from 'vue';
-    import {editCliente} from '../../data/clientes'
+    import {editCliente} from '../../services/clientes'
 
     const props = defineProps({
         cliente: {

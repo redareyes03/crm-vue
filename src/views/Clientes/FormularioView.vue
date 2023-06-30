@@ -5,7 +5,7 @@ import Boton from '../../components/UI/Boton.vue';
 import { ArrowRight } from '@element-plus/icons-vue'
 import 'element-plus/es/components/breadcrumb/style/css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
-import { getClienteById, postCliente, editCliente } from '../../../data/clientes';
+import { getClienteById, postCliente, editCliente } from '../../../services/clientes';
 import {reactive, onMounted} from 'vue';
 
 const clienteData = reactive({
