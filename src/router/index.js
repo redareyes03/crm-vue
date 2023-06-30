@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Inicio from '../views/Clientes/ListarView.vue'
+import not_found_page from '../views/Layouts/404_View.vue'
 
 
 const router = createRouter({
@@ -25,6 +26,11 @@ const router = createRouter({
       props: {
         pagina: "Editar"
       }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: not_found_page
     }
   ]
 })

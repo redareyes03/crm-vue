@@ -19,7 +19,7 @@ import { computed } from 'vue';
     const estadoCliente = computed(() => {
         return estados[props.cliente.estado]
     })
-    const claseEstadoCliente = computed(() => props.cliente.estado === 1 ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800')
+    const claseEstadoCliente = computed(() => props.cliente.estado === 1 ? 'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50' : 'bg-red-200 text-red-800 dark:bg-red-500 dark:text-red-50')
 </script>
 
 <template>
